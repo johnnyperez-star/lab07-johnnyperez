@@ -1,7 +1,7 @@
 // WordCount.cpp
 
 #include "WordCount.h"
-
+#include <sstream>
 using namespace std;
 
 // Default constructor
@@ -180,6 +180,12 @@ void WordCount::dumpWordsSortedByOccurence(std::ostream &out) const {
 }
 
 void WordCount::addAllWords(std::string text) {
-	// STUB
-	return;
+
+	std::istringstream iss(text);
+	std::string word;
+
+	while(iss >> word){
+		incrWordCount(word);
+	}
+
 }

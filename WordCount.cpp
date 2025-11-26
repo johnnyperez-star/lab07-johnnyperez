@@ -161,8 +161,22 @@ void WordCount::dumpWordsSortedByWord(std::ostream &out) const {
 
 
 void WordCount::dumpWordsSortedByOccurence(std::ostream &out) const {
-	// STUB
-	return "";
+	std::vector<std::pair<std::string, int>> tableCopy;
+
+	for(size_t i = 0; i < CAPACITY; i++){
+		for(const auto& pair : table[i]){
+			tableCopy.push_back(pair);
+		}
+	}
+
+	std::sort(tableCopy.begin(), tableCopy.end());
+	std::stable_sort(tableCopy.begin(), tableCopy.end(),[] (const std::pair<std::string, int>& a,
+								const std::pair<std::string, int>& b){return a.second < b.second;});
+	for(const auto& pair : tableCopy){
+		out << pair.first << "," << pair.second << '\n';
+	}
+
+
 }
 
 void WordCount::addAllWords(std::string text) {
